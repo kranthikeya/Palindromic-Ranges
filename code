@@ -1,0 +1,20 @@
+def verify(n):
+    s = str(n)
+    return s == s[::-1] 
+def sub_intr_count(l,r):
+    sub_count = [0] * (r-l + 2)
+    for i in range(l,r+1):
+        sub_count[i-l+1] = sub_count[i-l] + (1 if verify(i) else 0)
+    
+    counting = 0
+    
+    for i in range(l,r-l+ 2):
+        for j in range(i, r-l+2):
+            substr = sub_count[j]- sub_count[i-1]
+            if substr % 2 == 0:
+                counting += 1
+    return counting
+print(sub_intr_count(1, 2))  # Output: 1
+print(sub_intr_count(1, 7))  # Output: 12
+print(sub_intr_count(87, 88))  # Output: 1
+        
